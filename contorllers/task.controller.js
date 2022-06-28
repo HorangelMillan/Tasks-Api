@@ -1,5 +1,6 @@
 // models
 const { Tasks } = require('../models/task.model');
+const { Users } = require('../models/user.model')
 
 // utils
 const { catchAsync } = require('../utils/catchAsync.util');
@@ -49,8 +50,10 @@ const getTasksByStatus = catchAsync(async (req, res, next) => {
     });
 });
 
-const updateTasks = catchAsync(async (req, res, next) => {
+const updateTask = catchAsync(async (req, res, next) => {
     const { status, id, finishDate } = req.task;
+
+    // de alguna manera 'finishDate' llega con 5 horas de mas
 
     await Tasks.update({
         status,
@@ -66,7 +69,7 @@ const updateTasks = catchAsync(async (req, res, next) => {
     });
 });
 
-const cancelTask = catchAsync(async (req,res, next) => {
+const cancelTask = catchAsync(async (req, res, next) => {
     const { id } = req.task;
 
     await Tasks.update({
@@ -82,4 +85,4 @@ const cancelTask = catchAsync(async (req,res, next) => {
     });
 });
 
-module.exports = { createTask, getAllTasks, getTasksByStatus, updateTasks, cancelTask };
+module.exports = { createTask, getAllTasks, getTasksByStatus, updateTask, cancelTask };

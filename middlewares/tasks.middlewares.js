@@ -41,16 +41,17 @@ const isTask = catchAsync(async (req, res, next) => {
 
 const compareDate = catchAsync(async (req, res, next) => {
     const { limitDate } = req.task;
+    const { finishDate } = req.body;
+    
+    const formatDate = new Date(finishDate);
 
-    const finishDate = new Date();
-
-    if (Number(limitDate) >= Number(finishDate)) {
+    if (Number(limitDate) >= Number(formatDate)) {
         req.task.status = 'completed'
     } else {
         req.task.status = 'late'
     };
 
-    req.task.finishDate = finishDate
+    req.task.finishDate = formatDate;
     next();
 });
 

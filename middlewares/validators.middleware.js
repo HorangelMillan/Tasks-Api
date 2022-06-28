@@ -30,7 +30,13 @@ const createUserValidators = [
 const createTasksValidators = [
     body('title').notEmpty().withMessage('title cannot be empty'),
     body('userId').isNumeric().withMessage('userId should only be number'),
+    body('limitDate').isISO8601({ format: 'YYYY-MM-DDTHH:MM:SSZ' }).withMessage('must provide a valid date'),
     checkResult
 ];
 
-module.exports = { createUserValidators, createTasksValidators };
+const taskDateValidator = [
+    body('finishDate').isISO8601({ format: 'YYYY-MM-DDTHH:MM:SSZ' }).withMessage('must provide a valid date'),
+    checkResult
+];
+
+module.exports = { createUserValidators, createTasksValidators, taskDateValidator };
