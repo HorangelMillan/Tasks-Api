@@ -5,7 +5,11 @@ const { catchAsync } = require('../utils/catchAsync.util');
 const { Users } = require('../models/user.model');
 
 const getAllUsers = catchAsync(async (req, res, next) => {
-    const users = await Users.findAll();
+    const users = await Users.findAll({
+        where: {
+            status: 'active'
+        }
+    });
 
     res.status(200).json({
         status: 'success',
