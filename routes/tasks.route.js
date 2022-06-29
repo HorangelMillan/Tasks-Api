@@ -1,8 +1,5 @@
 const express = require('express');
 
-// Define routes
-const tasks = express.Router();
-
 // controllers
 const {
     createTask,
@@ -19,6 +16,9 @@ const {
     compareDate,
     isTask
 } = require('../middlewares/tasks.middlewares');
+
+// Define child routes
+const tasks = express.Router();
 
 tasks.post('/', createTasksValidators, createTask);
 

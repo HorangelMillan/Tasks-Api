@@ -1,6 +1,5 @@
 // models
 const { Tasks } = require('../models/task.model');
-const { Users } = require('../models/user.model')
 
 // utils
 const { catchAsync } = require('../utils/catchAsync.util');
@@ -52,8 +51,6 @@ const getTasksByStatus = catchAsync(async (req, res, next) => {
 
 const updateTask = catchAsync(async (req, res, next) => {
     const { status, id, finishDate } = req.task;
-
-    // de alguna manera 'finishDate' llega con 5 horas de mas
 
     await Tasks.update({
         status,

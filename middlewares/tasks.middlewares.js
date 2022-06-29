@@ -3,6 +3,7 @@ const { Tasks } = require('../models/task.model');
 const { appError } = require('../utils/appError');
 const { catchAsync } = require('../utils/catchAsync.util');
 
+// validate if /:status is valid and send status to getTaskByStatus
 const isStatus = catchAsync(async (req, res, next) => {
     const statusValues = [
         'active',
@@ -21,6 +22,7 @@ const isStatus = catchAsync(async (req, res, next) => {
     next();
 });
 
+// validate if task exist
 const isTask = catchAsync(async (req, res, next) => {
     const { id } = req.params;
 
@@ -39,6 +41,7 @@ const isTask = catchAsync(async (req, res, next) => {
     next();
 });
 
+// compare dates and send finishDate to updateTask with status complete/late
 const compareDate = catchAsync(async (req, res, next) => {
     const { limitDate } = req.task;
     const { finishDate } = req.body;
